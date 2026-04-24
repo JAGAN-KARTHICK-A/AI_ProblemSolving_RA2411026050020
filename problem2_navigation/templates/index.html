@@ -1,0 +1,15 @@
+
+<html><body>
+<h2>Navigation</h2>
+<textarea id=g>{"A":["B","C"],"B":["D"],"C":["E"],"D":[],"E":[]}</textarea><br>
+Start<input id=s value=A>Goal<input id=e value=E>
+<button onclick=f()>Run</button><pre id=o></pre>
+<script>
+function f(){
+fetch("/solve",{method:"POST",headers:{"Content-Type":"application/json"},
+body:JSON.stringify({graph:JSON.parse(g.value),start:s.value,goal:e.value})})
+.then(r=>r.json()).then(d=>{
+o.innerText="BFS:"+d.bfs+"\nDFS:"+d.dfs;
+});
+}
+</script></body></html>
