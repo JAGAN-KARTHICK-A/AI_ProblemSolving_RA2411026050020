@@ -1,0 +1,23 @@
+
+<html><body>
+<h2>TicTacToe</h2>
+<div id=g></div><p id=i></p>
+<script>
+let b=[" "," "," "," "," "," "," "," "," "];
+function r(){g.innerHTML="";
+b.forEach((v,i)=>{let d=document.createElement("button");
+d.innerText=v; d.onclick=()=>p(i); g.appendChild(d);});}
+function p(i){
+if(b[i]!=" ")return;
+b[i]="X";
+fetch("/move",{method:"POST",headers:{"Content-Type":"application/json"},
+body:JSON.stringify({board:b})})
+.then(r=>r.json()).then(d=>{
+b=d.board;
+i.innerText="Nodes "+d.nodes_minimax+" vs "+d.nodes_ab;
+r();
+});
+r();
+}
+r();
+</script></body></html>
